@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Trash } from "lucide-react";
 import { BadgeCheck } from "lucide-react";
@@ -12,10 +12,16 @@ export default function Home() {
   const [inputContent, setinputContent] = useState("");
   const [doneOrNot, setdoneOrNot] = useState(null);
 
-
+  useEffect(() => {
+    const storageExtract = JSON.parse(localStorage.getItem("ToDoList"))
+    setitemsArray(storageExtract)
+},[])
   function HandleinputContent() { 
     if (inputContent !== "") {
-      setitemsArray([...itemsArray, { text: inputContent , done:false }]);
+      const updatedItemsArray = [...itemsArray, { text: inputContent , done:false }]
+      setitemsArray(updatedItemsArray);
+      localStorage.setItem("ToDoList", JSON.stringify(updatedItemsArray));
+
     }
     setinputContent("")
   }
@@ -23,12 +29,16 @@ export default function Home() {
    
       const afterDelete = [...itemsArray];
       afterDelete.splice(index , 1)
-setitemsArray(afterDelete)
+    setitemsArray(afterDelete)
+    localStorage.setItem("ToDoList", JSON.stringify(afterDelete));
+
   }
   function handleDoneCheck(index) { 
     const afterCheckClicked = [...itemsArray];
     afterCheckClicked[index].done = !afterCheckClicked[index].done;
     setitemsArray(afterCheckClicked)
+    localStorage.setItem("ToDoList", JSON.stringify(afterCheckClicked));
+
   }
   return (
     <div className="flex justify-center items-center min-h-screen bg-amber-950 flex-col">
