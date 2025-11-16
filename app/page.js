@@ -13,8 +13,11 @@ export default function Home() {
   const [doneOrNot, setdoneOrNot] = useState(null);
 
   useEffect(() => {
-    const storageExtract = JSON.parse(localStorage.getItem("ToDoList"))
-    setitemsArray(storageExtract)
+    const storageExtract = localStorage.getItem("ToDoList");
+    if (storageExtract) {
+      setitemsArray(JSON.parse(storageExtract));
+
+    }
 },[])
   function HandleinputContent() { 
     if (inputContent !== "") {
