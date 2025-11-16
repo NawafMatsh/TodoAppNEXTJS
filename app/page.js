@@ -3,6 +3,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { Trash } from "lucide-react";
 import { BadgeCheck } from "lucide-react";
+import Link from "next/link";
+import { Github } from "lucide-react";
+import { X } from "lucide-react";
+
 export default function Home() {
   const [itemsArray, setitemsArray] = useState([]);
   const [inputContent, setinputContent] = useState("");
@@ -27,9 +31,9 @@ setitemsArray(afterDelete)
     setitemsArray(afterCheckClicked)
   }
   return (
-    <div className="flex justify-center items-center min-h-screen bg-amber-950">
+    <div className="flex justify-center items-center min-h-screen bg-amber-950 flex-col">
       {/* code below refers to the whole yallow sqaure. */}
-
+      <h1 className="text-5xl mb-6">منظم المهام اليومية</h1>
       <div className="bg-amber-400 w-80 flex justify-start flex-col  rounded-2xl">
         <div className="mt-6 flex justify-center p-1 items-baseline">
           <input
@@ -45,7 +49,8 @@ setitemsArray(afterDelete)
             onClick={HandleinputContent}
             className="bg-amber-950 p-2 rounded-sm hover:scale-110"
           >
-اضف المهمة          </button>
+            اضف المهمة{" "}
+          </button>
         </div>
         <hr className="mt-5 border-t-5 border-amber-900"></hr>
         {/* code below refers to the mission it self */}
@@ -172,6 +177,20 @@ setitemsArray(afterDelete)
           })}
         </ul>
       </div>
+      <Link
+        className="mt-20 flex flex-row-reverse bg-amber-400 p-2 rounded-md text-black"
+        href={"https://github.com/NawafMatsh/TodoAppNEXTJS"}
+      >
+        <h1>github رابط المشروع على</h1>
+        <Github />
+      </Link>
+      <Link
+        className="m-3 flex bg-amber-400 p-2 rounded-md text-black"
+        href={"https://x.com/nwfspace"}
+      >
+        <h1>Follow me on</h1>
+        <X />
+      </Link>
     </div>
   );
 }
