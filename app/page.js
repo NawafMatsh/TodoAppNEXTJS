@@ -44,11 +44,12 @@ export default function Home() {
 
   }
   return (
-    <div className="flex justify-center items-center min-h-screen bg-amber-950 flex-col">
+    <div
+      className="flex justify-center items-center min-h-screen bg-amber-950 flex-col">
       {/* code below refers to the whole yallow sqaure. */}
       <h1 className="text-5xl mb-6">منظم المهام اليومية</h1>
-      <div className="bg-amber-400 w-80 flex justify-start flex-col  rounded-2xl">
-        <div className="mt-6 flex justify-center p-1 items-baseline">
+      <div className="bg-amber-400 w-80 flex justify-start flex-col rounded-2xl pt-4 max-h-100 overflow-scroll border-2">
+        <div className="mt-4 flex justify-center p-1 items-center flex-col">
           <input
             value={inputContent}
             onChange={(event) => {
@@ -60,9 +61,9 @@ export default function Home() {
           ></input>
           <button
             onClick={HandleinputContent}
-            className="bg-amber-950 p-2 rounded-sm hover:scale-110"
+            className="bg-amber-950 p-2 rounded-sm hover:scale-110 mt-4"
           >
-            اضف المهمة{" "}
+            اضف المهمة
           </button>
         </div>
         <hr className="mt-5 border-t-5 border-amber-900"></hr>
@@ -99,7 +100,13 @@ export default function Home() {
             الكل{" "}
           </button>
         </div>
-
+        {itemsArray == "" ? (
+          <h1 className="flex justify-center m-12 text-amber-900">
+            ...لايوجد مهام اليوم
+          </h1>
+        ) : (
+          ""
+        )}
         <ul>
           {itemsArray.map((item, index) => {
             if (doneOrNot == 1 && item.done == true) {
