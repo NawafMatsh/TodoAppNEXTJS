@@ -1,6 +1,13 @@
-import { useState ,useEffect } from "react";
+"use client";
 
-export default function EditModal({ editModalVisiabilty, closeEditModal, initialText ,onSave}) {
+import { useState, useEffect } from "react";
+
+export default function EditModal({
+  editModalVisiabilty,
+  closeEditModal,
+  initialText,
+  onSave,
+}) {
   const [editInput, seteditInput] = useState("");
   useEffect(() => {
     seteditInput(initialText || "");
