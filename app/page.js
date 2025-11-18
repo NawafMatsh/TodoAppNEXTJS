@@ -6,11 +6,13 @@ import { BadgeCheck } from "lucide-react";
 import Link from "next/link";
 import { Github } from "lucide-react";
 import { X } from "lucide-react";
-
+import DeleteModal from "./deleteModal/page";
 export default function Home() {
   const [itemsArray, setitemsArray] = useState([]);
   const [inputContent, setinputContent] = useState("");
   const [doneOrNot, setdoneOrNot] = useState(null);
+  const [ModalVisiablity, setModalVisiablity] = useState(false);
+  const [itemIndex, setitemIndex] = useState(null);
 
   useEffect(() => {
     const storageExtract = localStorage.getItem("ToDoList");
@@ -34,7 +36,7 @@ export default function Home() {
       afterDelete.splice(index , 1)
     setitemsArray(afterDelete)
     localStorage.setItem("ToDoList", JSON.stringify(afterDelete));
-
+    setModalVisiablity(false);
   }
   function handleDoneCheck(index) { 
     const afterCheckClicked = [...itemsArray];
@@ -44,8 +46,7 @@ export default function Home() {
 
   }
   return (
-    <div
-      className="flex justify-center items-center min-h-screen bg-amber-950 flex-col">
+    <div className="flex justify-center items-center min-h-screen bg-amber-950 flex-col">
       {/* code below refers to the whole yallow sqaure. */}
       <h1 className="text-5xl mb-6">منظم المهام اليومية</h1>
       <div className="bg-amber-400 w-80 flex justify-start flex-col rounded-2xl pt-4 max-h-100 overflow-scroll border-2">
@@ -121,7 +122,10 @@ export default function Home() {
                   {item.text}
                   <div className="flex gap-1.5 justify-center items-center">
                     <button
-                      onClick={() => handleDeleteItem(index)}
+                      onClick={() => {
+                        setModalVisiablity(true);
+                        setitemIndex(index);
+                      }}
                       className="bg-amber-400 p-1 rounded-sm hover:scale-120 h-7"
                     >
                       <Trash className="w-5 h-5" />
@@ -149,7 +153,10 @@ export default function Home() {
                   {item.text}
                   <div className="flex gap-1.5 justify-center items-center">
                     <button
-                      onClick={() => handleDeleteItem(index)}
+                      onClick={() => {
+                        setModalVisiablity(true);
+                        setitemIndex(index);
+                      }}
                       className="bg-amber-400 p-1 rounded-sm hover:scale-120 h-7"
                     >
                       <Trash className="w-5 h-5" />
@@ -177,7 +184,10 @@ export default function Home() {
                   {item.text}
                   <div className="flex gap-1.5 justify-center items-center">
                     <button
-                      onClick={() => handleDeleteItem(index)}
+                      onClick={() => {
+                        setModalVisiablity(true);
+                        setitemIndex(index);
+                      }}
                       className="bg-amber-400 p-1 rounded-sm hover:scale-120 h-7"
                     >
                       <Trash className="w-5 h-5" />
@@ -211,6 +221,11 @@ export default function Home() {
         <h1>Follow me on</h1>
         <X />
       </Link>
+      <DeleteModal
+        deleteFunc={() => handleDeleteItem(itemIndex)}
+        visiableState={ModalVisiablity}
+        closeFunc={() => setModalVisiablity(false)}
+      />
     </div>
   );
 }
