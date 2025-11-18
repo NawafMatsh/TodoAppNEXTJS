@@ -8,9 +8,10 @@ export default function DeleteModal({deleteFunc ,visiableState ,closeFunc }) {
               className="bg-amber-950 flex flex-col p-5 h-40 rounded-lg justify-between border"
             >
               <div>
-                <h1 className="text-[20px]">جيبي الفحم</h1>
+                <h1 className="text-[20px]">متأكد ودك تحذف؟</h1>
                 <p className="text-[11px] mt-1">
-بسرعة                </p>
+                  لايمكن استرجاع المحذوفات لاحقاً
+                </p>
               </div>
 
               <div className="flex justify-center items-end">
